@@ -11,21 +11,21 @@ hbs.registerPartials(__dirname +'/views/partials');
 app.set('view engine', 'hbs');
 
 
-app.use(function(req,res,next){
-    res.render('maintenance.hbs');
-});
+// app.use(function(req,res,next){
+//     res.render('maintenance.hbs');
+// });
 
-app.use((req,res,next)=>{
-    var now = new Date().toString();
-    var log = now+req.method+req.url;
-    fs.appendFile('server.log',log+'/n',function(err){
-        if(err){
-            console.log('Error occured');
-        }
-    });
-    console.log(log);
-    next();
-});
+// app.use((req,res,next)=>{
+//     var now = new Date().toString();
+//     var log = now+req.method+req.url;
+//     fs.appendFile('server.log',log+'/n',function(err){
+//         if(err){
+//             console.log('Error occured');
+//         }
+//     });
+//     console.log(log);
+//     next();
+// });
 
 app.use(express.static(__dirname+'/public'));
 
@@ -53,6 +53,12 @@ app.get('/about',function(req,res){
         pageTitle:'About Page',
     });
 
+});
+
+app.get('/projects',function(req,res){
+    res.render('projects.hbs',{
+        pageTitle:'Projects Page'
+    });
 });
 
 app.get('/bad', function(req,res){
